@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>Socials stats — blef</title>
+
+    <link rel="stylesheet" href="static/css/skeleton.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<div id="app" class="o-grid-container">
+    <div class="container">
+
+        <div class="row">
+            <h1>stats</h1>
+        </div>
+
+        <div class="row">
+            <h5>followers</h5>
+        </div>
+
+        <div class="row followers">
+            <div class="three columns kpi linkedin">
+                <div class="title">LinkedIn</div>
+                <div class="value">-</div>
+            </div>
+            <div class="three columns kpi blog">
+                <div class="title">Newsletter</div>
+                <div class="value">-</div>
+            </div>
+            <div class="three columns kpi youtube">
+                <div class="title">YouTube</div>
+                <div class="value">-</div>
+            </div>
+            <div class="three columns kpi twitter">
+                <div class="title">Twitter</div>
+                <div class="value">-</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5>views</h5>
+        </div>
+
+        <div class="row views">
+            <div class="six columns chart youtube"></div>
+            <div class="six columns chart linkedin"></div>
+        </div>
+
+        <div class="row">
+            <h5>newsletter</h5>
+        </div>
+
+        <div class="row newsletter">
+            <div class="three columns kpis">
+                <div class="kpi totalNonMembers">
+                    <div class="title">Unsubscribed</div>
+                    <div class="value">-</div>
+                </div>
+                <div class="kpi openRate">
+                    <div class="title">Open rate</div>
+                    <div class="value">-</div>
+                </div>
+            </div>
+            <div class="three columns chart countries"></div>
+            <div class="six columns chart daily"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+<script src="static/js/index.js"></script>
+</html>
