@@ -37,7 +37,7 @@ const drawSpan = (selector, value) => {
 
 const displayFollowers = (data) => {
     const platforms = ["linkedin", "blog", "youtube", "twitter"];
-    const followers = data.at(-1);
+    const followers = data[data.length - 1];
     platforms.map(d => {
         drawSpan(`div.kpi.${d} .value`, followers[`${d}_followers`])
     });
