@@ -42,26 +42,39 @@ const drawRidgeline = (data, title) => {
     const groups = main
         .selectAll("g")
         .data(data)
-        .join("g")
-        .attr("transform", (_, i) => `translate(0,${i * chartSize.height / 80})`);
+        .join(
+            enter => {
+                let group = enter.append("g").attr("transform", (_, i) => `translate(0,${i * chartSize.height / 80})`);
+                group.append("path")
+                    .attr("d", signal => {
+                        return d3.area(d => d[0], d => d[1], d => d[2])(
+                            signal.map((d, i) => [xScale(i), -yScale(d), -yScale(d3.min(signal))])
+                        );
+                    })
+                    .attr("stroke", "none")
+                    .attr("fill", "black")
+                    .attr("class", "area");
 
-    groups
-        .append("path")
-        .attr("d", signal => {
-            return d3.area(d => d[0], d => d[1], d => d[2])(
-                signal.map((d, i) => [xScale(i), -yScale(d), -yScale(d3.min(signal))])
-            );
-        })
-        .attr("stroke", "none")
-        .attr("fill", "black");
-
-    groups
-        .append("path")
-        .attr("d", signal => {
-            return d3.line()(signal.map((d, i) => [xScale(i), -yScale(d)]));
-        })
-        .attr("stroke", "white")
-        .attr("fill", "none");
+                group.append("path")
+                    .attr("d", signal => {
+                        return d3.line()(signal.map((d, i) => [xScale(i), -yScale(d)]));
+                    })
+                    .attr("stroke", "white")
+                    .attr("fill", "none")
+                    .attr("class", "line");
+                return enter;
+            },
+            update => {
+                update.select("path.area").transition(150).attr("d", signal => {
+                    return d3.area(d => d[0], d => d[1], d => d[2])(
+                        signal.map((d, i) => [xScale(i), -yScale(d), -yScale(d3.min(signal))])
+                    );
+                });
+                update.select("path.line").transition(150).attr("d", signal => {
+                    return d3.line()(signal.map((d, i) => [xScale(i), -yScale(d)]));
+                });
+            })
+    ;
 }
 
 const initOriginal = () => {
@@ -97,12 +110,12 @@ const initAlter = () => {
                 switch (e.which) {
                     case 38: // up
                         selectedCity = cities[mod(cities.indexOf(selectedCity) - 1, cities.length)];
-                        drawRidgeline(data[selectedCity], `${selectedCity.toUpperCase()} • UNKNOWN FUTURE`);
+                        drawRidgeline(data[selectedCity].map(createBins), `${selectedCity.toUpperCase()} • UNKNOWN FUTURE`);
                         break;
 
                     case 40: // down
                         selectedCity = cities[mod(cities.indexOf(selectedCity) + 1, cities.length)];
-                        drawRidgeline(data[selectedCity], `${selectedCity.toUpperCase()} • UNKNOWN FUTURE`);
+                        drawRidgeline(data[selectedCity].map(createBins), `${selectedCity.toUpperCase()} • UNKNOWN FUTURE`);
                         break;
 
                     default:
