@@ -11,5 +11,35 @@ body {
     justify-content: center;
 }
 
-.main {
+.explanation-display {
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: grey;
+}
+
+.explanation {
+    position: absolute;
+    bottom: 0;
+    padding: 30px 200px;
+    background-color: #666;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: .9em;
+}
+
+.explanation.hidden {
+    display: block;
+    bottom: 500px;
+}
+
+.click {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
 }
