@@ -4,6 +4,7 @@ const getRandom = (max) => Math.floor(Math.random() * max);
 const chartSize = {width: width / 2.5, height: height / 2};
 const xDomain = [0, chartSize.width],
     yDomain = [0, chartSize.height / 30];
+const pageHref = new URL(window.location.href);
 
 const svg = d3.select(".main").append("svg")
     .attr("width", width)
@@ -127,14 +128,14 @@ const getMinMaxThresholds = (data) => {
     return [min, max, thresholds];
 }
 
-const initAlter = () => {
+const initAlter = (city, inBackground=true) => {
     const url = "http://localhost:3000/joy/all.json"
 
     fetch(url)
         .then(d => d.json())
         .then(data => {
             const cities = Object.keys(data);
-            let selectedCity = cities[0]
+            let selectedCity = city
             let selectedData = data[selectedCity];
             let [min, max, thresholds] = getMinMaxThresholds(selectedData);
 
@@ -146,6 +147,8 @@ const initAlter = () => {
                 switch (e.which) {
                     case 38: // up
                         selectedCity = cities[mod(cities.indexOf(selectedCity) - 1, cities.length)];
+                        pageHref.searchParams.set('city', selectedCity);
+                        window.history.pushState("Unknown Future", selectedCity, pageHref.toString());
                         selectedData = data[selectedCity];
                         [min, max, thresholds] = getMinMaxThresholds(selectedData);
                         drawRidgeline(selectedData.map(d => createBins(d, min, max, thresholds)), `${selectedCity.toUpperCase()} • UNKNOWN FUTURE`);
@@ -153,6 +156,8 @@ const initAlter = () => {
 
                     case 40: // down
                         selectedCity = cities[mod(cities.indexOf(selectedCity) + 1, cities.length)];
+                        pageHref.searchParams.set('city', selectedCity);
+                        window.history.pushState("Unknown Future", selectedCity, pageHref.toString());
                         selectedData = data[selectedCity];
                         [min, max, thresholds] = getMinMaxThresholds(selectedData);
                         drawRidgeline(selectedData.map(d => createBins(d, min, max, thresholds)), `${selectedCity.toUpperCase()} • UNKNOWN FUTURE`);
@@ -167,11 +172,8 @@ const initAlter = () => {
 
             return [selectedData.map(d => createBins(d, min, max, thresholds)), selectedCity];
         })
-        .then(([data, city]) => drawRidgeline(data, `${city.toUpperCase()} • UNKNOWN FUTURE`));
+        .then(([data, city]) => !inBackground && drawRidgeline(data, `${city.toUpperCase()} • UNKNOWN FUTURE`));
 }
-
-// initOriginal();
-initAlter();
 
 let legendVisible = false;
 d3.select(".legend.click").on("click", () => {
@@ -194,3 +196,16 @@ d3.select(".explanation-display").on("click", () => {
         d3.select(".explanation").classed("hidden", true);
     }
 })
+
+d3.select(".original.click").on("click", () => {
+    initOriginal();
+})
+
+const urlCity = pageHref.searchParams.get("city");
+
+if (urlCity && urlCity !== "original") {
+    initAlter(urlCity, false);
+} else {
+    initAlter("global");
+    initOriginal();
+}
