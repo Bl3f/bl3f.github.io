@@ -1,41 +1,50 @@
-country,city,population,lat,lon,closest_index
-China,Beijing,215420000,39.906217,116.3912757,1844
-Japan,Tokyo,139292861,35.6828387,139.7594549,2028
-DR Congo,Kinshasa,126910002,-4.3217055,15.3125974,3854
-Russia,Moscow,125064683,55.7504461,37.6174943,912
-Indonesia,Jakarta,100753104,-6.1753942,106.827183,3942
-South Korea,Seoul,98388925,37.5666791,126.9782914,1936
-Egypt,Cairo,98485766,30.0443879,31.2357257,2340
-Mexico,Mexico City,89186537,19.4326296,-99.1331785,2834
-United Kingdom,London,89080818,51.5073219,-0.1276474,1072
-Bangladesh,Dhaka,89060399,23.7861979,90.4026151,2724
-Peru,Lima,885200010,-12.0621065,-77.0365256,4141
-Iran,Tehran,869370611,35.6892523,51.3896004,1987
-Thailand,Bangkok,830521812,13.7525438,100.4934734,3177
-Vietnam,Hanoi,805366313,21.0294498,105.8544441,2823
-Saudi Arabia,Riyadh,767665414,24.638916,46.7160104,2615
-Hong Kong,Hong Kong,748250015,22.2793278,114.1628131,2827
-Colombia,Bogotá,718146916,4.6533326,-74.083652,3514
-Iraq,Baghdad,671950017,33.3024309,44.3787992,2161
-Chile,Santiago,631000018,-33.4377756,-70.6504502,4832
-Singapore,Singapore,563870019,1.357107,103.8194992,3670
-Turkey,Ankara,544502620,39.9207886,32.8540482,1805
-Germany,Berlin,374814821,52.5170365,13.3888599,1077
-Syria,Damascus,350000022,33.5130695,36.3095814,2156
-Algeria,Algiers,341581123,36.7753606,3.0601882,1970
-Spain,Madrid,326612624,40.4167047,-3.7035825,1703
-North Korea,Pyongyang,314400525,39.0167979,125.7473609,1848
-Afghanistan,Kabul,314085326,34.5260109,69.1776838,2084
-Kenya,Nairobi,313836927,-1.2832533,36.8172449,3724
-Ethiopia,Addis Ababa,304074028,9.0107934,38.7612525,3365
-Argentina,Buenos Aires,289108229,-34.6075682,-58.4370894,4873
-Italy,Rome,287310430,41.8933203,12.4829321,1620
-Ukraine,Kyiv,284720031,50.4500336,30.5241361,1171
-Cameroon,Yaoundé,276556832,3.8689867,11.5213344,3536
-Taiwan,Taipei,266857233,25.0375198,121.5636796,2657
-Brazil,Brasília,264853234,-10.3333333,-53.2,4103
-Jordan,Amman,260060335,31.9515694,35.9239625,2249
-Angola,Luanda,245377936,-8.8272699,13.2439512,4050
-Guatemala,Guatemala City,245021237,14.6222328,-90.5185188,3062
-South Africa,Pretoria,234590838,-25.7459374,28.1879444,4621
-France,Paris,224134639,48.8588897,2.3200410217200766,1251
+country,city
+China,Beijing
+Japan,Tokyo
+DR Congo,Kinshasa
+Russia,Moscow
+Indonesia,Jakarta
+South Korea,Seoul
+Egypt,Cairo
+Mexico,Mexico City
+United Kingdom,London
+Bangladesh,Dhaka
+Peru,Lima
+Iran,Tehran
+Thailand,Bangkok
+Vietnam,Hanoi
+Saudi Arabia,Riyadh
+Hong Kong,Hong Kong
+Colombia,Bogotá
+Iraq,Baghdad
+Chile,Santiago
+Singapore,Singapore
+Turkey,Ankara
+Germany,Berlin
+Syria,Damascus
+Algeria,Algiers
+Spain,Madrid
+North Korea,Pyongyang
+Afghanistan,Kabul
+Kenya,Nairobi
+Ethiopia,Addis Ababa
+Argentina,Buenos Aires
+Italy,Rome
+Ukraine,Kyiv
+Cameroon,Yaoundé
+Taiwan,Taipei
+Brazil,Brasília
+Jordan,Amman
+Angola,Luanda
+Guatemala,Guatemala City
+South Africa,Pretoria
+France,Paris
+USA,New York
+USA,Los Angeles
+USA,San Francisco
+China,Shanghai
+China,Hotan
+Poland,Orzesze
+USA,Yosemite Lakes
+Mali,Bamako
+Canberra,Australia
