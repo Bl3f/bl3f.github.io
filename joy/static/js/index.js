@@ -129,7 +129,7 @@ const getMinMaxThresholds = (data) => {
 }
 
 const initAlter = (city, inBackground=true) => {
-    const url = "http://localhost:3000/joy/all-cities.json"
+    const url = "/joy/all-cities.json"
 
     fetch(url)
         .then(d => d.json())
