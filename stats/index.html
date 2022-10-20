@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="static/css/skeleton.css">
     <link rel="stylesheet" href="static/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="app" class="o-grid-container">
@@ -21,19 +22,19 @@
         </div>
 
         <div class="row followers">
-            <div class="three columns kpi linkedin">
+            <div class="three columns kpi linkedin" data-kpi="linkedin">
                 <div class="title">LinkedIn</div>
                 <div class="value">-</div>
             </div>
-            <div class="three columns kpi blog">
+            <div class="three columns kpi blog" data-kpi="blog">
                 <div class="title">Newsletter</div>
                 <div class="value">-</div>
             </div>
-            <div class="three columns kpi youtube">
+            <div class="three columns kpi youtube" data-kpi="youtube">
                 <div class="title">YouTube</div>
                 <div class="value">-</div>
             </div>
-            <div class="three columns kpi twitter">
+            <div class="three columns kpi twitter" data-kpi="twitter">
                 <div class="title">Twitter</div>
                 <div class="value">-</div>
             </div>
@@ -54,11 +55,11 @@
 
         <div class="row newsletter">
             <div class="three columns kpis">
-                <div class="kpi totalNonMembers">
+                <div class="kpi totalNonMembers" data-kpi="totalNonMembers">
                     <div class="title">Unsubscribed</div>
                     <div class="value">-</div>
                 </div>
-                <div class="kpi openRate">
+                <div class="kpi openRate" data-kpi="openRate">
                     <div class="title">Open rate</div>
                     <div class="value">-</div>
                 </div>
@@ -74,7 +75,16 @@
 <script>
   !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="aT1oZkwMg59zC6Va1pTmXrorZ5Rqqpgj";;analytics.SNIPPET_VERSION="4.15.3";
   analytics.load("aT1oZkwMg59zC6Va1pTmXrorZ5Rqqpgj");
-  analytics.page();
+  analytics.page("Homepage");
   }}();
+</script>
+<script>
+    analytics.identify();
+
+    $(".kpi").hover(event => {
+        event.preventDefault();
+        const hoveredKpi = $(event.target).attr("data-kpi");
+        analytics.track("hover_kpi", {"name": hoveredKpi})
+    });
 </script>
 </html>
