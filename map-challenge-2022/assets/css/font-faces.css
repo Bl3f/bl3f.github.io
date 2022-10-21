@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Test Domaine Display';
+    src: url('../fonts/Test Domaine Display/test-domaine-display-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Test Domaine Display';
+    src: url('../fonts/Test Domaine Display/test-domaine-display-bold.woff2') format('woff2');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Garnett Regular';
+    src: url('../fonts/garnett-font-family/Garnett-Regular.ttf') format('ttf'),
+        url('../fonts/garnett-font-family/Garnett-Regular.woff') format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Garnett Regular';
+    src: url('../fonts/garnett-font-family/Garnett-Light.ttf') format('ttf'),
+        url('../fonts/garnett-font-family/Garnett-Light.woff') format('woff');
+    font-weight: 200;
+}
