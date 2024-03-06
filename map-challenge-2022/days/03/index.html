@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Day 1 — 30-day Map Challenge</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-delaunay@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-geo-voronoi@2"></script>
+
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #d2cfe9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #map {
+            width: 920px;
+            height: 600px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="map"></div>
+
+<script type="module">
+    const colors = ["#440154","#482475","#414487","#355f8d","#2a788e","#21918c","#22a884","#44bf70","#7ad151","#bddf26","#fde725"];
+
+    const width = 920,
+        height = 600,
+        margin = 50;
+
+    const svg = d3.select("#map").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    const draw = svg.append('g')
+        .attr('class', 'draw')
+        .attr('transform', `translate(${margin},${margin})`);
+
+
+    const world = await d3.json("/map-challenge-2022/days/01/custom.geo.json");
+    const capitals = (await d3.csv("/map-challenge-2022/days/01/concap.csv"))
+        .map(d => ({name: d.CountryName, coordinates: [parseFloat(d.CapitalLongitude), parseFloat(d.CapitalLatitude)], code: d.CountryCode}))
+        .filter(d => world.features.map(f => f.properties.iso_a2_eh).includes(d.code));
+
+    console.log(capitals);
+
+    let projection = d3.geoAzimuthalEqualArea().fitSize([width - 2 * margin, height - 2 * margin], world);
+    //geoAzimuthalEqualArea
+
+    const gv = d3.geoVoronoi().x(r => +r[0] + 1e-3 * Math.random())(capitals.map(d => d.coordinates));
+    const polygons = gv.polygons().features;
+
+
+    let geoGenerator = d3.geoPath().projection(projection);
+
+    // let u = draw.append('g')
+    //     .selectAll('path')
+    //     .data(world.features)
+    //     .join('path')
+    //     .attr('d', geoGenerator)
+    //     .attr('stroke', '#DDD')
+    //     .attr('fill', 'none')
+    //     .style('opacity', .5)
+    //     .style('stroke-width', .5);
+
+    let meshGroup = draw.append('g').attr('class', 'mesh');
+
+    let mesh = meshGroup.append('g')
+        .selectAll('path')
+        .data(polygons)
+        .join('path')
+        .attr('d', geoGenerator)
+        .attr('stroke', '#DDD')
+        .attr('fill', (d, i) => {
+            const neighbours = d.properties.neighbours;
+            const available_colors = colors.filter(color => !polygons.filter((d, i) => neighbours.includes(i)).map(d => d.color).includes(color));
+            polygons[i].color = available_colors[0];
+            return polygons[i].color;
+        })
+        .attr('name', (d, i) => capitals[i].name)
+        .style('stroke-width', .5);
+
+    let citiesGroup = draw.append('g').attr('class', 'capitals');
+
+    let cities = citiesGroup
+        .selectAll('.city')
+        .data(capitals)
+        .join('g')
+        .attr('class', 'capital');
+
+    const circleRadius = 1;
+    cities.append("circle")
+        .attr('cx', d => projection(d.coordinates)[0])
+        .attr('cy', d => projection(d.coordinates)[1])
+        .attr('r', d => circleRadius)
+        .attr('name', d => d.name);
+
+
+
+</script>
+
+</body>
+</html>
