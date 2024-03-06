@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Day 1 — 30-day Map Challenge</title>
+    <title>Day 3 — 30-day Map Challenge</title>
 
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -56,8 +56,8 @@
         .attr('transform', `translate(${margin},${margin})`);
 
 
-    const world = await d3.json("/map-challenge-2022/days/01/custom.geo.json");
-    const capitals = (await d3.csv("/map-challenge-2022/days/01/concap.csv"))
+    const world = await d3.json("/map-challenge-2022/days/03/custom.geo.json");
+    const capitals = (await d3.csv("/map-challenge-2022/days/03/concap.csv"))
         .map(d => ({name: d.CountryName, coordinates: [parseFloat(d.CapitalLongitude), parseFloat(d.CapitalLatitude)], code: d.CountryCode}))
         .filter(d => world.features.map(f => f.properties.iso_a2_eh).includes(d.code));
 
